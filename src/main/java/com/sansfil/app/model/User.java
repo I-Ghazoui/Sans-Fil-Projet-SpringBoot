@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Data;
@@ -29,6 +32,10 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "poste_id")
+	private Poste poste;
 	
 	@Column(name = "date_creation_compte")
 	private Date dateCreationCompte;

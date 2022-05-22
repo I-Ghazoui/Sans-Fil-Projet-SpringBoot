@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
 
 <head>
 <meta charset="utf-8">
@@ -15,33 +16,19 @@
 <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
-<body class="d-flex flex-column min-vh-100" style="background: #f2f2f6;">
+<body class="d-flex flex-column min-vh-100">
 	
 	<navbar th:replace="inc/navbar :: navbar"></navbar>
 	
-	<header class="mt-5">
-		<div class="container d-flex justify-content-between align-items-end">
-			<div>
-				<h1 class="fw-bold" style="color: #1f5793;">List des salles</h1>
-				<span>List des salles avec leurs etages, vous pouvez chercher
-					...</span>
-			</div>
-			<div class="d-flex align-items-center">
-				<input type="text" class="form-control mx-2" name="nom"
-					placeholder="Mot"><select class="form-control"
-					style="min-width: 10rem;">
-					<optgroup label="Etages">
-						<option value="1">Etage 1</option>
-						<option value="2">Etage 2</option>
-						<option value="3">Etage 3</option>
-					</optgroup>
-				</select>
-				<button class="btn btn-primary mx-2" type="button">Chercher!</button>
-			</div>
+	<!-- Header -->
+	<header class="bg-primary text-center py-5 mb-4">
+		<div class="container">
+			<h1 class="fw-light text-white">List des salles</h1>
 		</div>
 	</header>
+
 	<!-- Page Content -->
-	<div class="container my-3">
+	<div class="container">
 		<div class="row">
 			<!-- Start Salle Card -->
 			<div class="col-xl-3 col-md-6 mb-4" th:each="salle : ${listSalles}">

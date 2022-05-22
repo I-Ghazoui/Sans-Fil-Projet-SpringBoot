@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sansfil.app.Repository.PosteRepository;
+import com.sansfil.app.Service.PosteService;
 import com.sansfil.app.Service.SalleService;
 import com.sansfil.app.Service.UserService;
 import com.sansfil.app.model.User;
@@ -22,6 +24,10 @@ public class UserController {
 	
 	@Autowired
 	private SalleService salleService;
+	
+	@Autowired
+	private PosteService posteService;
+	
 
 	@GetMapping({"/", "/index"})
 	public String loginPage(Model model,  HttpServletRequest request) {
@@ -54,4 +60,32 @@ public class UserController {
 		session.invalidate();
 		return "index";
 	}
+	
+	//Get page with all users
+	@GetMapping({"/users"})
+	public String getAllUsers(Model model,  HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId") != null) {	//User is connected
+			model.addAttribute("listUsers", userService.getAllUsers());	//Get all salles
+			Integer userId = (Integer) session.getAttribute("userId");
+			userService.findUserById(userId).ifPresent(user -> model.addAttribute("user", user));	//Get User infos
+			return "users";
+		}else {		//User is not connected
+			return "index";
+		}
+	}
+	
+	//Get page with all users
+		@GetMapping({"/parametres"})
+		public String editProfile(Model model,  HttpServletRequest request) {
+			HttpSession session = request.getSession();
+			if(session.getAttribute("userId") != null) {	//User is connected
+				model.addAttribute("listPostes", posteService.getAllPostes());	//Get all salles
+				Integer userId = (Integer) session.getAttribute("userId");
+				userService.findUserById(userId).ifPresent(user -> model.addAttribute("user", user));	//Get User infos
+				return "editProfile";
+			}else {		//User is not connected
+				return "index";
+			}
+		}
 }

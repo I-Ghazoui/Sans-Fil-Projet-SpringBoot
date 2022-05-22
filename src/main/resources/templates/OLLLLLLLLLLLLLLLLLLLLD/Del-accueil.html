@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+<title>Projet Final Sans Fil</title>
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="assets/css/Navbar-With-Button.css">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+
+	<navbar th:replace="inc/navbar :: navbar"></navbar>
+
+
+	<!-- Header -->
+	<header class="bg-primary text-center py-5 mb-4">
+		<div class="container">
+			<h1 class="fw-light text-white">List des salles</h1>
+		</div>
+	</header>
+
+	<!-- Page Content -->
+	<div class="container">
+		<div class="row">
+
+			<!-- Start Salle Card -->
+			<div class="col-xl-3 col-md-6 mb-4" th:each="salle : ${listSalles}">
+				<div class="card border-0 shadow">
+					<img src="https://source.unsplash.com/TMgQMXoglsM/500x350"
+						class="card-img-top" alt="...">
+					<div class="card-body text-center">
+						<h5 class="card-title mb-0" th:utext="${salle.nom}"></h5>
+						<div class="card-text text-black-50">Web Developer</div>
+					</div>
+				</div>
+			</div>
+			<!-- End Salle Card -->
+		</div>
+		<!-- /.row -->
+
+	</div>
+	<!-- /.container -->
+	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+.Header-Right-login-Form-1 {
+  min-height: 100vh;
+}
+
+.Header-Left-bg-image-F {
+  background-image: url('../../assets/img/img/ensam.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.Header-login-heading {
+  font-weight: 300;
+}
+
+.Header-Form-btn-login {
+  font-size: 0.9rem;
+  letter-spacing: 0.05rem;
+  padding: 0.75rem 1rem;
+}
+

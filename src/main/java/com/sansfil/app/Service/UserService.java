@@ -18,6 +18,10 @@ public class UserService {
 		userRepository.save(user);
 	}
 	
+	public Iterable<User> getAllUsers(){
+		return userRepository.findAll();
+	}
+	
 	public User findUserByUsernameAndPassword(String username, String password) {
 		return userRepository.findByUsernameAndPassword(username, password);
 	}

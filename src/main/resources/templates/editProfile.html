@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Projet Final Sans Fil</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Card-Table-Snippet-N1.css">
+    <link rel="stylesheet" href="assets/css/Header-With-Image-on-left-and-login-form-on-right.css">
+    <link rel="stylesheet" href="assets/css/Navbar-With-Button.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100" style="background: #f2f2f6;">
+    
+    <navbar th:replace="inc/navbar :: navbar"></navbar>
+    
+    <header class="mt-5">
+        <div class="container">
+            <h1 class="fw-bold" style="color: #1f5793;">Modifier profil</h1>
+        </div>
+    </header>
+    <div class="container my-3"><div class="container shadow-lg rounded bg-white">
+    <div class="row">
+        <div class="col-md-4 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5 mb-2" src="https://i.imgur.com/O1RmJXT.jpg" width="170">
+                <span class="font-weight-bold" th:utext="${user.lastName + ' ' + user.firstName}">il gha</span>
+                <span class="text-black-50" th:utext="${user.email}">ema</span>
+                <span th:utext="${user.poste.nom}">admi</span></div>
+        </div>
+        <div class="col-md-8 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h6 class="text-right">Modifier votre profil</h6>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Prenom</label><input type="text" class="form-control" th:value="${user.firstName}" th:placeholder="${user.firstName}"></div>
+                    <div class="col-md-6"><label class="labels">Nom</label><input type="text" class="form-control" th:value="${user.lastName}" th:placeholder="${user.lastName}"></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Nom d'utilisateur</label><input type="text" class="form-control" th:value="${user.username}" th:placeholder="${user.username}"></div>
+                    <div class="col-md-6"><label class="labels">Email</label><input type="email" class="form-control" th:value="${user.email}" th:placeholder="${user.email}"></div>
+
+                </div>
+                <div class="row mt-3">       
+                    <div class="col-md-6"><label class="labels">Image</label><input type="file" class="form-control"></div>             
+                    <div class="col-md-6"><label class="labels">Poste</label>
+                        <select name="poste" class="form-control">
+                            <option listPostes th:each="poste : ${listPostes}" th:value="${poste.id}" th:utext="${poste.nom}"></option>
+                        </select>
+                    </div>
+                    
+                   <!-- 
+                       <div class="col-md-12"><label class="labels">Headline</label><input type="text" class="form-control" placeholder="headline" value="UI/UX Developer"></div>
+                    <div class="col-md-12"><label class="labels">Current position</label><input type="text" class="form-control" placeholder="headline" value="UI/UX Developer at Boston"></div>
+                    <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value="Boston University"></div>
+                    -->
+                </div>
+                <!-- <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control" placeholder="country" value="USA"></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="Boston" placeholder="state"></div>
+                </div> -->
+                <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Sauvegarder</button></div>
+            </div>
+        </div>
+    </div>
+    </div></div>
+    
+    <footerbar th:replace="inc/footer :: footerbar"></footerbar>
+    
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+</body>
+
+</html>
