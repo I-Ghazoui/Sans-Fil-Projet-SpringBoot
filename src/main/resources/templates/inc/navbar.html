@@ -2,37 +2,39 @@
 	xmlns:th="http://www.thymeleaf.org">
 <navbar th:fragment="navbar">
 <nav class="navbar navbar-light navbar-expand-md py-3"
-		style="background: #ffffff;">
-		<div class="container">
-			<a class="navbar-brand d-flex align-items-center" href="#"><img
-				src="assets/img/img/ensam-logo.png" style="max-height: 45px;"></a>
-			<button data-bs-toggle="collapse" class="navbar-toggler"
-				data-bs-target="#navcol-2">
-				<span class="visually-hidden">Toggle navigation</span><span
-					class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navcol-2">
-				<ul class="navbar-nav me-auto">
-					<li class="nav-item"><a class="nav-link active" href="/index">SALLES</a></li>
-					<li class="nav-item"><a class="nav-link" href="/users">UTILISATEURS</a></li>
-				</ul>
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<ul class="navbar-nav ms-auto">
-						<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-							role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-							aria-expanded="false" th:utext="${user.lastName + ' ' + user.firstName + ' (' + user.username + ')'}"></a> <!-- Here's the magic. Add the .animate and .slideIn classes to your .dropdown-menu and you're all set! -->
-							<div class="dropdown-menu dropdown-menu-end animate slideIn"
-								aria-labelledby="navbarDropdown">
-								<a class="dropdown-item" href="#">Profil</a> <a
+	style="background: #ffffff;">
+	<div class="container">
+		<a class="navbar-brand d-flex align-items-center" href="#"><img
+			src="assets/img/img/ensam-logo.png" style="max-height: 45px;"></a>
+		<button data-bs-toggle="collapse" class="navbar-toggler"
+			data-bs-target="#navcol-2">
+			<span class="visually-hidden">Toggle navigation</span><span
+				class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navcol-2">
+			<ul class="navbar-nav me-auto">
+				<li class="nav-item"><a class="nav-link active" href="/index">Salles</a></li>
+				<li class="nav-item"><a class="nav-link" href="/personnes">Personnes</a></li>
+			</ul>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav ms-auto">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"
+						th:utext="${user.lastName + ' ' + user.firstName + ' (' + user.username + ')'}"></a>
+						<!-- Here's the magic. Add the .animate and .slideIn classes to your .dropdown-menu and you're all set! -->
+						<div class="dropdown-menu dropdown-menu-end animate slideIn"
+							aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="#">Profil</a> <a
 								class="dropdown-item" href="/parametres">Parametres</a>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="/logout">Se deconnecter</a>
-							</div></li>
-					</ul>
-				</div>
+						</div></li>
+				</ul>
 			</div>
 		</div>
-	</nav>
+	</div>
+</nav>
 </navbar>
 </html>

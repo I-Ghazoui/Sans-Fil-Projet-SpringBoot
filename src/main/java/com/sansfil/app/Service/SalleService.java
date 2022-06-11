@@ -15,4 +15,13 @@ public class SalleService {
 	public Iterable<Salle> getAllSalles(){
 		return salleRepository.findAll();
 	}
+	
+	public boolean ajouterSalle(Salle salle) {
+		try {
+			salleRepository.save(salle);
+			return true;
+		}catch (Exception e) {
+			return false;
+		}
+	}
 }

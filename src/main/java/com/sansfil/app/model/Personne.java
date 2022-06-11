@@ -3,8 +3,6 @@ package com.sansfil.app.model;
 import java.sql.Blob;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -12,16 +10,18 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name="salles")
-public class Salle {
+@Table(name="personnes")
+public class Personne {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private String rfid;
 	
 	private String nom;
 	
-	private String location;
+	private String prenom;
 	
 	private Blob image;
+	
+	private String email;
+	
 }
