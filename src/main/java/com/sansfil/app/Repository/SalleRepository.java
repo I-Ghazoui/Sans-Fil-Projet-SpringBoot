@@ -7,5 +7,11 @@ import com.sansfil.app.model.Salle;
 
 @Repository
 public interface SalleRepository extends CrudRepository<Salle, Integer>{
+	
+	public Iterable<Salle> findByNomContainingAndLocation(String nom, String location);
+	
+	public Iterable<Salle> findByNomContaining(String nom);
+	
+	public Iterable<Salle> findByLocation(String location);
 
 }

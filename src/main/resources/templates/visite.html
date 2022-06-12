@@ -6,13 +6,13 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 <title>Projet Final Sans Fil</title>
-<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-<link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
-<link rel="stylesheet" href="assets/css/Card-Table-Snippet-N1.css">
+<link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="/assets/fonts/font-awesome.min.css">
+<link rel="stylesheet" href="/assets/css/Card-Table-Snippet-N1.css">
 <link rel="stylesheet"
-	href="assets/css/Header-With-Image-on-left-and-login-form-on-right.css">
-<link rel="stylesheet" href="assets/css/Navbar-With-Button.css">
-<link rel="stylesheet" href="assets/css/styles.css">
+	href="/assets/css/Header-With-Image-on-left-and-login-form-on-right.css">
+<link rel="stylesheet" href="/assets/css/Navbar-With-Button.css">
+<link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100" style="background: #f2f2f6;">
@@ -38,36 +38,38 @@
 				<tr class="border-bottom">
 					<th><span class="ml-2">Date</span></th>
 					<th><span class="ml-2">Utilisateur</span></th>
-					<th><span class="ml-2">Customer</span></th>
-					<th><span class="ml-2">Location</span></th>
+					<th><span class="ml-2">Rf-Id</span></th>
+					<th><span class="ml-2">Salle</span></th>
 					<th><span class="ml-4">Action</span></th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="border-bottom">
+				<tr class="border-bottom" th:each="visite : ${listDesVisites}">
 					<td>
 						<div class="p-2">
-							<span class="d-block font-weight-bold">Tomorrow</span> <small>2:30PM</small>
+							<span class="d-block font-weight-bold" th:text="${#dates.format(visite.dateEntree, 'dd-MM-yyyy')}"></span> 
+							<small th:text="${#dates.format(visite.dateEntree, 'HH:mm:ss')}"></small>
 						</div>
 					</td>
 					<td>
 						<div class="p-2 d-flex flex-row align-items-center mb-2">
 							<img src="https://i.imgur.com/ZSkeqnd.jpg" width="40"
 								class="rounded-circle" />
-							<div class="d-flex flex-column ml-2">
-								<span class="d-block font-weight-bold">Jennifer john</span> <small
-									class="text-muted">Jasmine Owner Reality group</small>
+							<div class="d-flex flex-column ms-2">
+								<span class="d-block font-weight-bold" th:text="${visite.personne.nom + ' ' + visite.personne.prenom}"></span> <small
+									class="text-muted" th:text="${visite.personne.email}"></small>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div class="p-2">
-							<span class="font-weight-bold">Ammy Song</span>
+							<span class="font-weight-bold" th:text="${visite.personne.rfid}"></span>
 						</div>
 					</td>
 					<td>
 						<div class="p-2 d-flex flex-column">
-							<span>1 City point,#2A</span> <span> Brooklyn,NY</span>
+							<span th:text="${visite.salle.nom}"></span> 
+							<span th:text="${visite.salle.location}"></span>
 						</div>
 					</td>
 					<td>
@@ -85,7 +87,7 @@
 
 	<footerbar th:replace="inc/footer :: footerbar"></footerbar>
 
-	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

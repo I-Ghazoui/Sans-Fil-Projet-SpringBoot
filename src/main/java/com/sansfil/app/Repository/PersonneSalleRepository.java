@@ -8,4 +8,7 @@ import com.sansfil.app.model.PersonneSalle;
 @Repository
 public interface PersonneSalleRepository extends CrudRepository<PersonneSalle, Integer> {
 
+	public Iterable<PersonneSalle> findByOrderByDateEntreeDesc();
+	
+	public Iterable<PersonneSalle> findBySalleIdOrderByDateEntreeDesc(Integer SalleId);
 }

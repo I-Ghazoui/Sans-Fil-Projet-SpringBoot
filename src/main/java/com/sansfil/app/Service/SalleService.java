@@ -16,7 +16,22 @@ public class SalleService {
 		return salleRepository.findAll();
 	}
 	
-	public boolean ajouterSalle(Salle salle) {
+	public Iterable<Salle> getSallesByNom(String nom){
+		return salleRepository.findByNomContaining(nom);
+	}
+	
+	public Iterable<Salle> getSallesByLocation(String location){
+		return salleRepository.findByLocation(location);
+	}
+	
+	public Iterable<Salle> getSallesByNomAndLocation(String nom, String location){
+		return salleRepository.findByNomContainingAndLocation(nom, location);
+	}
+	
+	public boolean ajouterSalle(String nom, String etage) {
+		Salle salle = new Salle();
+		salle.setNom(nom);
+		salle.setLocation(etage);
 		try {
 			salleRepository.save(salle);
 			return true;

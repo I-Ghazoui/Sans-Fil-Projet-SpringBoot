@@ -6,3 +6,9 @@ INSERT INTO `salles` (`id`, `image`, `nom`, `location`) VALUES (NULL, 'image', '
 INSERT INTO `admins` (`id`, `email`, `prenom`, `nom`, `password`, `username`) VALUES (NULL, 'i-ghazoui@live.fr', 'Ilyas', 'Ghazoui', 'ilyas', 'ilyas');
 INSERT INTO `admins` (`id`, `email`, `prenom`, `nom`, `password`, `username`) VALUES (NULL, 'mouad.chakiri@gmail.com', 'Mouad', 'Chakiri', 'mouad', 'mouad');
 INSERT INTO `admins` (`id`, `email`, `prenom`, `nom`, `password`, `username`) VALUES (NULL, 'khalid.ait-zi@gmail.com', 'Khalid', 'Ait Zi', 'khalid', 'khalid');
+
+Insert into `personne_salle`(`id`, `date_entree`, `id_pers`, `id_classe`) values (null, now(), 'A5E2DS9', 1);
+Insert into `personne_salle`(`id`, `date_entree`, `id_pers`, `id_classe`) values (null, now(), 'A5E2DS9', 2);
+Insert into `personne_salle`(`id`, `date_entree`, `id_pers`, `id_classe`) values (null, now(), 'A5E2DS9', 1);
+Insert into `personne_salle`(`id`, `date_entree`, `id_pers`, `id_classe`) values (null, now(), 'A5E2DS9', 2);
+Insert into `personne_salle`(`id`, `date_entree`, `id_pers`, `id_classe`) values (null, now(), 'A5E2DS9', 1);

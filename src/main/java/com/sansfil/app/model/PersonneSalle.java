@@ -3,6 +3,7 @@ package com.sansfil.app.model;
 import java.util.Date;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,6 +34,7 @@ public class PersonneSalle {
 	private Salle salle;
 	
 	@CreatedDate
-	private Date date_entree;
+	@Column(name="date_entree")
+	private Date dateEntree;
 
 }

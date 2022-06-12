@@ -12,7 +12,14 @@ public class PersonneSalleService {
 	@Autowired
 	PersonneSalleRepository personneSalleRepository;
 	
-	public Iterable<PersonneSalle> getAllPostes(){
+	public Iterable<PersonneSalle> getAllVisites(){
 		return personneSalleRepository.findAll();
+	}
+	public Iterable<PersonneSalle> getAllVisitesOrderedByDateEbtree(){
+		return personneSalleRepository.findByOrderByDateEntreeDesc();
+	}
+	
+	public Iterable<PersonneSalle> getAllVisitesBySalleId(Integer salleId){
+		return personneSalleRepository.findBySalleIdOrderByDateEntreeDesc(salleId);
 	}
 }

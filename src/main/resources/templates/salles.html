@@ -29,8 +29,16 @@
 	cursor: pointer;
 }
 
+.button3 {
+	background: #73a839;
+}
+
 .button2:hover {
 	background: #033c73;
+}
+
+.button3:hover {
+	background: #73a839;
 }
 
 .button2:active {
@@ -63,33 +71,43 @@
 				<span>List des salles avec leurs etages, vous pouvez
 					chercher...</span>
 			</div>
-			<div class="d-flex">
-				<button type="button" class="button2 mx-1" data-toggle="modal"
-					data-target="#exampleModal">
-					<span class="button__text">Ajouter</span> <span
-						class="button__icon"> <ion-icon name="add-circle-outline"></ion-icon>
-					</span>
-				</button>
-				<button type="button" class="button2 mx-1 button3" id="navbarDropdown" 
-					data-bs-toggle="dropdown" aria-haspopup="true"
+			<form method="POST" action="salles">
+				<div class="d-flex">
+
+					<button type="button" class="button2 mx-1" data-toggle="modal"
+						data-target="#exampleModal">
+						<span class="button__text">Ajouter</span> <span
+							class="button__icon"> <ion-icon name="add-circle-outline"></ion-icon>
+						</span>
+					</button>
+					<button type="button" class="button2 mx-1 button3"
+						id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="false">
-					<span class="button__text">Filtrer</span> <span
-						class="button__icon"> <ion-icon name="search-outline"></ion-icon>
-					</span>
-				</button>
-				<div class="dropdown-menu dropdown-menu-end animate slideIn" aria-labelledby="navbarDropdown">
-					<input type="text" class="form-control m-1" name="nom" placeholder="nom">
-					<select class="form-control m-1" style="min-width: 10rem;">
-						<optgroup label="Etages">
-							<option value="1">Etage 1</option>
-							<option value="2">Etage 2</option>
-							<option value="3">Etage 3</option>
-						</optgroup>
-					</select>
-					<div class="dropdown-divider"></div>
-					<button class="btn btn-primary w-100" type="button">Chercher!</button>
+						<span class="button__text">Filtrer</span> <span
+							class="button__icon"> <ion-icon name="search-outline"></ion-icon>
+						</span>
+					</button>
+					<div class="dropdown-menu dropdown-menu-end animate slideIn"
+						aria-labelledby="navbarDropdown">
+						<input type="text" class="form-control m-1" name="nom"
+							style="width: auto;" placeholder="Nom de la salle"> <select
+							class="form-control m-1" name="etage"
+							style="width: -webkit-fill-available;">
+							<option value="all">Tous les etages</option>
+							<optgroup label="Etages">
+								<option value="Etage 1">Etage 1</option>
+								<option value="Etage 2">Etage 2</option>
+								<option value="Etage 3">Etage 3</option>
+							</optgroup>
+						</select>
+						<div class="dropdown-divider"></div>
+						<button class="btn btn-success mx-2"
+							style="width: -webkit-fill-available;" name="chercher"
+							type="submit">Chercher!</button>
+					</div>
+
 				</div>
-			</div>
+			</form>
 			<!--
 			<div class="d-flex align-items-center">
 				<input type="text" class="form-control mx-2" name="nom"
@@ -109,17 +127,19 @@
 	<!-- Page Content -->
 	<div class="container my-3">
 		<div class="row">
-			<div class="alert alert-success" role="alert"
-				th:if="${statusAjoutSalle != null}">A simple success
-				alert—check it out!</div>
+			
+			<div class="alert alert-success" th:if="${statusAjoutSalleSuccess != null}" role="alert" th:text="${statusAjoutSalleSuccess}"></div>
+			
+			<div class="alert alert-danger" th:if="${statusAjoutSalleErreur != null}" role="alert" th:text="${statusAjoutSalleErreur}"></div>
+				
 			<!-- Start Salle Card -->
 			<div class="col-xl-3 col-md-6 mb-4" th:each="salle : ${listSalles}">
-				<div class="card border-0 shadow">
+				<div class="card border-0 shadow" th:onclick="|location.href='visite/salle/${salle.id}'|" style="cursor: pointer;">
 					<img src="https://source.unsplash.com/TMgQMXoglsM/500x350"
 						class="card-img-top" alt="...">
 					<div class="card-body text-center">
 						<h5 class="card-title mb-0" th:utext="${salle.nom}"></h5>
-						<div class="card-text text-black-50">Web Developer</div>
+						<div class="card-text text-black-50" th:utext="${salle.location}"></div>
 					</div>
 				</div>
 			</div>
@@ -138,7 +158,7 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form method="POST" action="index">
+				<form method="POST" action="salles">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Ajouter une
 							salle</h5>
@@ -149,28 +169,29 @@
 					</div>
 					<div class="modal-body">
 						<div class="row mt-2">
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<label class="labels">Nom</label><input type="text"
-									class="form-control" name="nomSalle"
+									class="form-control" name="nom"
 									placeholder="Al-Khawarizmi">
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-6 my-2">
 								<label class="labels">Location</label><select
-									class="form-control" name="locationSalle"
+									class="form-control" name="etage"
 									style="min-width: 10rem;">
 									<optgroup label="Etages">
-										<option value="1">Etage 1</option>
-										<option value="2">Etage 2</option>
-										<option value="3">Etage 3</option>
+										<option value="Etage 1">Etage 1</option>
+										<option value="Etage 2">Etage 2</option>
+										<option value="Etage 3">Etage 3</option>
 									</optgroup>
 								</select>
 							</div>
-							<div class="col-md-12">
+							<div class="col-md-12 my-2">
 								<label class="labels">Image</label><input type="file"
 									class="form-control">
 							</div>
 							<div class="mt-5 text-center">
-								<button class="btn btn-primary profile-button" type="submit">Ajouter</button>
+								<button class="btn btn-primary profile-button" name="ajouter"
+							type="submit">Ajouter</button>
 							</div>
 						</div>
 					</div>
