@@ -57,6 +57,19 @@
 	font-size: 1.5em;
 	background: rgba(0, 0, 0, 0.08);
 }
+
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    	color: #1f5793;
+	}
+	
+	.dropdown-item:hover {
+		background-color: #1f5793 !important;	
+	}
+	
+	body.modal-open {
+    	overflow: hidden;
+	}
 </style>
 </head>
 
@@ -134,8 +147,8 @@
 				
 			<!-- Start Salle Card -->
 			<div class="col-xl-3 col-md-6 mb-4" th:each="salle : ${listSalles}">
-				<div class="card border-0 shadow" th:onclick="|location.href='visite/salle/${salle.id}'|" style="cursor: pointer;">
-					<img src="https://source.unsplash.com/TMgQMXoglsM/500x350"
+				<div class="card border-0 shadow h-100" th:onclick="|location.href='visite/salle/${salle.id}'|" style="cursor: pointer;">
+					<img th:src="${salle.image}" style="object-fit: cover; height: -webkit-fill-available;"
 						class="card-img-top" alt="...">
 					<div class="card-body text-center">
 						<h5 class="card-title mb-0" th:utext="${salle.nom}"></h5>
@@ -158,25 +171,21 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form method="POST" action="salles">
+				<form method="POST" action="salles" enctype="multipart/form-data">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Ajouter une
 							salle</h5>
-						<button type="button" class="close" data-dismiss="modal"
-							aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
 					</div>
 					<div class="modal-body">
 						<div class="row mt-2">
 							<div class="col-md-6 my-2">
 								<label class="labels">Nom</label><input type="text"
-									class="form-control" name="nom"
+									class="form-control" name="nom" required
 									placeholder="Al-Khawarizmi">
 							</div>
 							<div class="col-md-6 my-2">
 								<label class="labels">Location</label><select
-									class="form-control" name="etage"
+									class="form-control" name="etage" required
 									style="min-width: 10rem;">
 									<optgroup label="Etages">
 										<option value="Etage 1">Etage 1</option>
@@ -186,11 +195,10 @@
 								</select>
 							</div>
 							<div class="col-md-12 my-2">
-								<label class="labels">Image</label><input type="file"
-									class="form-control">
+								<label class="labels">Image</label><input type="file" name="image" required class="form-control">
 							</div>
 							<div class="mt-5 text-center">
-								<button class="btn btn-primary profile-button" name="ajouter"
+								<button class="btn btn-info profile-button" name="ajouter"
 							type="submit">Ajouter</button>
 							</div>
 						</div>

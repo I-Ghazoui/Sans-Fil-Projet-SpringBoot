@@ -28,10 +28,11 @@ public class SalleService {
 		return salleRepository.findByNomContainingAndLocation(nom, location);
 	}
 	
-	public boolean ajouterSalle(String nom, String etage) {
+	public boolean ajouterSalle(String nom, String etage, String image) {
 		Salle salle = new Salle();
 		salle.setNom(nom);
 		salle.setLocation(etage);
+		salle.setImage(image);
 		try {
 			salleRepository.save(salle);
 			return true;

@@ -1,7 +1,5 @@
 package com.sansfil.app.model;
 
-import java.sql.Blob;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,5 +21,5 @@ public class Salle {
 	
 	private String location;
 	
-	private Blob image;
+	private String image;
 }

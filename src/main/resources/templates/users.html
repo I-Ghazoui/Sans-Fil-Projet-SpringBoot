@@ -57,6 +57,17 @@
 	font-size: 1.5em;
 	background: rgba(0, 0, 0, 0.08);
 }
+
+
+
+    .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+    	color: #1f5793;
+	}
+	
+	.dropdown-item:hover {
+		background-color: #1f5793 !important;	
+	}
+	
 </style>
 </head>
 
@@ -113,7 +124,7 @@
 		<table class="table table-borderless table-responsive card-1 p-4">
 			<thead>
 				<tr class="border-bottom">
-					<th><span class="ml-2">Id</span></th>
+					<th><span class="ml-2">RFid</span></th>
 					<th><span class="ml-2">Profil</span></th>
 					<th><span class="ml-2">Poste</span></th>
 					<th><span class="ml-2">Date création</span></th>
@@ -129,29 +140,32 @@
 						</div>
 					</td>
 					<td>
-						<div class="p-2 d-flex flex-row align-items-center mb-2">
-							<img src="https://i.imgur.com/ZSkeqnd.jpg" width="40"
-								class="rounded-circle" />
-							<div class="d-flex flex-column ms-2">
+						<div class="p-2 d-flex flex-row align-items-center mb-2"
+							th:data-parameter1="${personne.rfid}"
+							th:onclick="|location.href='/visite/personne/'+this.getAttribute('data-parameter1')|" 
+							style="cursor: pointer;">
+							<img th:src="${personne.image}" width="50" height="50" style="object-fit: cover;" class="rounded-circle" />
+							<div class="d-flex flex-column ms-2" >
 								<span class="d-block font-weight-bold"
-									th:utext="${personne.nom + ' ' + personne.prenom}"></span> <small
+									th:utext="${personne.nom + ' ' + personne.prenom}"></span> 
+								<small
 									class="text-muted" th:utext="${personne.email}"></small>
 							</div>
 						</div>
 					</td>
 					<td>
 						<div class="p-2">
-							<span class="font-weight-bold" th:utext="${personne.email}"></span>
+							<span class="font-weight-bold" th:utext="${personne.poste}"></span>
 						</div>
 					</td>
 					<td>
 						<div class="p-2 d-flex flex-column">
-							<span th:utext="${personne.email}"></span>
+							<span th:text="${#temporals.format(personne.dateCreation, 'dd-MM-yyyy')}"></span>
 						</div>
 					</td>
 					<td>
 						<div class="p-2 icons">
-							<i class="fa fa-edit"></i> <i class="fa fa-remove text-danger"></i>
+							<button style="all: unset; cursor: pointer;" data-toggle="modal" th:data-target="${'#supprimerPersonne' + personne.rfid}"><i class="fa fa-remove text-danger"></i></button>
 						</div>
 					</td>
 				</tr>
@@ -159,6 +173,33 @@
 
 			</tbody>
 		</table>
+	</div>
+	
+	<!-- Modal Supprimer Personne -->
+	<div th:each="personne : ${listPersonnes}" class="modal fade" th:id="${'supprimerPersonne' + personne.rfid}" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<form method="POST" action="personnes" enctype="multipart/form-data">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Supprimer un utilisateur</h5>
+					</div>
+					<div class="modal-body">
+						<div class="row mt-2">
+							<div class="col-md-12 my-2">
+								<h5 th:text="${'Etes-vous sur de supprimer ' + personne.nom + ' ' + personne.prenom} + ' ?'"></h5>
+							</div>
+							<form method="POST" action="">
+								<input type="text" style="display: none;" name="rfid" th:value="${personne.rfid}">
+								<div class="mt-5 text-center">
+									<button class="btn btn-info profile-button" name="supprimer" type="submit">Supprimer</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 
 
@@ -168,7 +209,7 @@
 		aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<form method="POST" action="personnes">
+				<form method="POST" action="personnes" enctype="multipart/form-data">
 					<div class="modal-header">
 						<h5 class="modal-title" id="exampleModalLabel">Ajouter un
 							utilisateur</h5>
@@ -180,28 +221,31 @@
 					<div class="modal-body">
 						<div class="row mt-2">
 							<div class="col-md-6 my-2">
-								<label class="labels">Rfid</label><input type="text"
-									class="form-control" name="rfid" placeholder="AE25C47">
+								<label class="labels">Rfid</label>
+								<input type="text" class="form-control" required name="rfid" placeholder="AE25C47">
 							</div>
 							<div class="col-md-6 my-2">
-								<label class="labels">Email</label><input type="email"
-									class="form-control" name="email" placeholder="email@ensam.com">
+								<label class="labels">Email</label>
+								<input type="email" class="form-control" required name="email" placeholder="email@ensam.com">
 							</div>
 							<div class="col-md-6 my-2">
-								<label class="labels">Nom</label><input type="text"
-									class="form-control" name="nom" placeholder="Nom">
+								<label class="labels">Nom</label>
+								<input type="text" class="form-control" required name="nom" placeholder="Nom">
 							</div>
 							<div class="col-md-6 my-2">
-								<label class="labels">Prenom</label><input type="text"
-									class="form-control" name="prenom" placeholder="Prenom">
+								<label class="labels">Prenom</label>
+								<input type="text" class="form-control" required name="prenom" placeholder="Prenom">
 							</div>
 							<div class="col-md-12 my-2">
-								<label class="labels">Image</label><input type="file"
-									class="form-control">
+								<label class="labels">Poste</label>
+								<input type="text" class="form-control" required name="poste" placeholder="Poste">
+							</div>
+							<div class="col-md-12 my-2">
+								<label class="labels">Image</label>
+								<input type="file" name="image" required class="form-control">
 							</div>
 							<div class="mt-5 text-center">
-								<button class="btn btn-primary profile-button" name="ajouter"
-									type="submit">Ajouter</button>
+								<button class="btn btn-info profile-button" name="ajouter" type="submit">Ajouter</button>
 							</div>
 						</div>
 					</div>
